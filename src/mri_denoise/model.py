@@ -4,7 +4,7 @@
 def build_residual_cnn():
     """Build a small PyTorch model that predicts noise and subtracts it from the input."""
     try:
-        import torch.nn as nn
+        from torch import nn
     except ImportError as exc:
         raise ImportError("Install PyTorch with pip install -e '.[deep]'") from exc
 

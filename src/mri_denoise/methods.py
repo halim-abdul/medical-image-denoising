@@ -2,6 +2,7 @@
 import numpy as np
 from scipy.ndimage import gaussian_filter, median_filter
 from skimage.restoration import denoise_nl_means, denoise_tv_chambolle, denoise_wavelet
+
 from .noise import estimate_sigma_mad
 
 METHODS = ("gaussian", "median", "nlm", "wavelet", "tv", "na_wtv", "bm3d")
