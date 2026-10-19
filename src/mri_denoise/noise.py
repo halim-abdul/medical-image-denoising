@@ -15,10 +15,11 @@ def add_rician_noise(image: np.ndarray, sigma: float, seed: int | None = None) -
 
 
 def estimate_sigma_mad(image: np.ndarray) -> float:
-    """Estimate scale from robust MAD of diagonal high-pass coefficients."""
+    """Estimate Gaussian noise scale from MAD of unit-energy diagonal high-pass coefficients."""
     x = np.asarray(image, dtype=np.float64)
     if x.ndim != 2 or min(x.shape) < 2:
         raise ValueError("image must be 2-D and at least 2x2")
+    # The kernel has unit squared norm, so white Gaussian noise keeps its variance.
     detail = convolve(x, np.array([[1, -1], [-1, 1]]) / 2.0, mode="reflect")
     med = np.median(detail)
-    return float(np.median(np.abs(detail - med)) / (0.67448975 * np.sqrt(2.0)))
+    return float(np.median(np.abs(detail - med)) / 0.67448975)
