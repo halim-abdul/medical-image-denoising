@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mri-denoise-bench"
+version = "0.1.0"
+description = "MRI denoising baselines and a noise-adaptive wavelet-TV hybrid"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Abdul Halim"}]
+dependencies = ["numpy>=1.24", "scipy>=1.10", "scikit-image>=0.21", "PyWavelets>=1.5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+bm3d = ["bm3d>=4.0"]
+deep = ["torch>=2.1"]
+
+[project.scripts]
+mri-denoise = "mri_denoise.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
